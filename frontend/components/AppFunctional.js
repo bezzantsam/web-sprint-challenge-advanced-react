@@ -1,6 +1,12 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 
 export default function AppFunctional(props) {
+  const [stateValue, setStateValue] = useState(false);
+
+  const goUp = (e) => {
+    // some code
+  };
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
@@ -33,5 +39,5 @@ export default function AppFunctional(props) {
         <input id="submit" type="submit"></input>
       </form>
     </div>
-  )
+  );
 }

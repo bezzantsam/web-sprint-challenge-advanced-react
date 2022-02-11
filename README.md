@@ -45,14 +45,14 @@ Other browser/Node/NPM configurations might work but haven't been tested.
 
 ### MVP 1, The Grid - Long Explanation
 
-- Replicate the **functionality and DOM** shown in the prototype linked at the top of this README.
-- Keep your code inside `frontend/components/AppFunctional.js` and `frontend/components/AppClass.js`.
-- The component exposed by `AppFunctional.js` must be a stateful functional component.
-- The one in `AppClass.js` must be a stateful class-based component.
-- The DOM produced by your components must match exactly the DOM in the prototype:
-  - The hierarchy of HTML elements, their ids, class names etc must be the same.
-  - The current square is marked with a capital B and an "active" class name.
-  - The submit success and error messages that display on the page come from the API (see Network tab).
+- ✅Replicate the **functionality and DOM** shown in the prototype linked at the top of this README.
+- ✅Keep your code inside `frontend/components/AppFunctional.js` and `frontend/components/AppClass.js`.
+- ✅The component exposed by `AppFunctional.js` must be a stateful functional component.
+- ✅The one in `AppClass.js` must be a stateful class-based component.
+- ✅The DOM produced by your components must match exactly the DOM in the prototype:
+  - ✅The hierarchy of HTML elements, their ids, class names etc must be the same.
+  - ✅The current square is marked with a capital B and an "active" class name.
+  - ✅The submit success and error messages that display on the page come from the API (see Network tab).
   - No frontend form validation code is required.
 - The coordinates of each square of the grid are as follows:
 

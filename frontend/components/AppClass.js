@@ -1,6 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
 export default class AppClass extends React.Component {
+  state = {
+    stateValue: false,
+  };
+
+  goUp(e) {
+    // ...
+  }
+
   render() {
     const { className } = this.props;
     return (
