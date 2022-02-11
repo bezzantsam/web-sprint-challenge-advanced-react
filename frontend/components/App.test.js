@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/react-in-jsx-scope */
-//import ClassComponent from "./AppClass.js";
+import ClassComponent from "./AppClass.js";
 import React from "react";
 import FunctionalComponent from "./AppFunctional";
 import { render, fireEvent } from "@testing-library/react";
@@ -72,4 +72,37 @@ describe("Testing Functional component", () => {
   });
 });
 
-describe("Testing Class Component", () => {});
+describe("Testing Class component", () => {
+  beforeEach(() => {
+    render(<ClassComponent />);
+    updateStatelessSelectors(document);
+    updateStatefulSelectors(document);
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("should be rendering on screen", () => {
+    console.log(document);
+    expect(document.querySelectorAll("#wrapper").length).toBeGreaterThan(0);
+  });
+  it('should have a h3 tag with the id "coordinates"', () => {
+    console.log(document);
+    expect(document.querySelectorAll("#coordinates").length).toBeGreaterThan(0);
+  });
+  it("should have a field text for email", () => {
+    console.log(document);
+    expect(document.querySelectorAll("#email").length).toBeGreaterThan(0);
+  });
+  it('should have h3 tag with id "steps"', () => {
+    console.log(document);
+    expect(document.querySelectorAll("#steps").length).toBeGreaterThan(0);
+  });
+
+  it("should change the value on the input box by the given value", () => {
+    const email = document.querySelector("#email");
+    fireEvent.change(email, { target: { value: "test@123.com" } });
+    expect(email).toHaveValue("test@123.com");
+  });
+});

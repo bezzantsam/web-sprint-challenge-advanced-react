@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function AppFunctional(props) {
@@ -11,11 +12,6 @@ export default function AppFunctional(props) {
   useEffect(()=> {
     resetGame();
   },[]);
-
-  useEffect(() =>{
-    
-  },
-  [grid,moves,email])
 
   const resetGame = () => {
     const gameMatrix = [
@@ -108,18 +104,46 @@ export default function AppFunctional(props) {
     setEmail(emailText)
   }
 
+  const CheckWin = async (e) => {
+    e.preventDefault();
+    if(email.trim().length === 0){
+      setMessage('Ouch: email is required')
+      return;
+    }
+    const {row,column} = findCurrentPosition();
+    const AxiosRequestObject = {
+      url : "http://localhost:9000/api/result",
+      method: "POST",
+      data : {
+        x: column + 1,
+        y: row + 1,
+        steps : moves,
+        email
+      }
+    }
+    try {
+      const response = await axios(AxiosRequestObject);
+      setMessage(response.data.message)
+      setEmail('')
+    } catch (e) {
+      setMessage(e.response.data.message)
+      setEmail('')
+    }
+    
+  }
+
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates ({coordinates[0]},{coordinates[1]})</h3>
+        <h3 id="coordinates">Coordinates ({coordinates[1]},{coordinates[0]})</h3>
         <h3 id="steps">You moved {moves} times</h3>
       </div>
       <div id="grid">
         {
-          grid.map( (rows) =>{
-            return rows.map(cell => {
+          grid.map( (rows,rowIdx) =>{
+            return rows.map((cell,cellIdx) => {
               // eslint-disable-next-line react/jsx-key
-              return (<div 
+              return (<div key={`cell-${rowIdx}-${cellIdx}`} 
                 className={`square ${cell === 1 ? 'active':''}`}>
                   {`${cell === 1 ? 'B':''}`}
                 </div>)
@@ -137,8 +161,8 @@ export default function AppFunctional(props) {
         <button id="down" onClick={(e)=>handlerDirectional(e)}>DOWN</button>
         <button id="reset" onClick={(e)=>handlerDirectional(e)}>reset</button>
       </div>
-      <form>
-        <input id="email" type="email" onChange={(e)=> handleEmailChange(e)} placeholder="type email"></input>
+      <form onSubmit={(e) => CheckWin(e)}>
+        <input id="email" type="email" value={email} onChange={(e)=> handleEmailChange(e)} placeholder="type email"></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
