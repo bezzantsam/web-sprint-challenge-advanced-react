@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 export default class AppClass extends React.Component {
   render() {
-    const { className } = this.props
+    const { className } = this.props;
     return (
       <div id="wrapper" className={className}>
         <div className="info">
@@ -35,6 +35,7 @@ export default class AppClass extends React.Component {
           <input id="submit" type="submit"></input>
         </form>
       </div>
-    )
+    );
   }
 }
+// export default AppClass
