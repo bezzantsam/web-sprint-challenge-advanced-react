@@ -3,7 +3,7 @@
 //import ClassComponent from "./AppClass.js";
 import React from "react";
 import FunctionalComponent from "./AppFunctional";
-import { render, screen } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 // Write your tests here
 
@@ -63,6 +63,12 @@ describe("Testing Functional component", () => {
   it('should have h3 tag with id "steps"', () => {
     console.log(document);
     expect(document.querySelectorAll("#steps").length).toBeGreaterThan(0);
+  });
+
+  it("should change the value on the input box by the given value", () => {
+    const email = document.querySelector("#email");
+    fireEvent.change(email, { target: { value: "test@123.com" } });
+    expect(email).toHaveValue("test@123.com");
   });
 });
 
